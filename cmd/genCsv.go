@@ -28,14 +28,16 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-type Config struct {
-	Row_num int `yaml:"row_num"`
-	Col []Col_info `yaml:"Col_info"`
-}
-
 type Col_info struct {
 	Col_name string `yaml:"col_name"`
 	Str_len int `yaml:"str_len"`
+	Require bool `yaml:"require"`
+}
+
+type Config struct {
+	Row_num int `yaml:"row_num"`
+	Col_info []Col_info `yaml:"Col_info"`
+	Nc string `yaml:"nc"`
 }
 
 // genCsvCmd represents the genCsv command
@@ -68,16 +70,17 @@ func genCSV(args []string) {
 	if err != nil {
 		os.Exit(1)
 	}
+	defer f.Close()
 
 	w := csv.NewWriter(f)
 
-	//csvに書き込むデータを作成する
+	// csvに書き込むデータを作成する
 	for i := 0; i < config_data.Row_num; i++ {
 		var record []string
-		for _,d := range config_data.Col {
+		for _,d := range config_data.Col_info {
 			if i == 0 {
 				record = append(record,d.Col_name)
-				break
+				continue
 			}
 			format := "%0" + strconv.Itoa(d.Str_len) + "d"
 			record = append(record,fmt.Sprintf(format,GenRandomNum(d.Str_len)))
