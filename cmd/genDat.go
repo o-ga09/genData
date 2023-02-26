@@ -17,6 +17,9 @@ package cmd
 
 import (
 	"fmt"
+	"io/ioutil"
+	"os"
+	"strconv"
 
 	"github.com/spf13/cobra"
 )
@@ -27,8 +30,47 @@ var genDatCmd = &cobra.Command{
 	Short: "generate dat file",
 	Long: `generate dat file with yaml config file.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("genDat called")
+		genDat(os.Args)
 	},
+}
+
+func genDat(args []string) {
+	//引数チェック
+	if len(os.Args) < 4 {
+		fmt.Println("need to config file")
+		os.Exit(1)
+	}
+	//コンフィグファイルを開く
+	in_files := args[2]
+	buf ,_:= ioutil.ReadFile(in_files)
+	config_data, err := ReadConfigfile(buf)
+	if err != nil {
+		os.Exit(1)
+	}
+
+	//データを書き込むファイルを作成する
+	out_file := args[3]
+
+	f,err := os.Create(out_file)
+	if err != nil {
+		os.Exit(1)
+	}
+	defer  f.Close()
+
+	for i := 0;i < config_data.Row_num;i++ {
+		var record string
+		for _,d := range config_data.Col_info {
+			format_int := "%0" + strconv.Itoa(d.Str_len) + "d"
+			format_str := "%" + strconv.Itoa(d.Str_len) + "s"
+			if !d.Require {
+				record += fmt.Sprintf(format_str," ")	
+			} else {
+				record += fmt.Sprintf(format_int,GenRandomNum(d.Str_len))
+			}
+		}
+		record += config_data.Nc
+		f.WriteString(record)
+	}
 }
 
 func init() {
