@@ -32,6 +32,8 @@ type Col_info struct {
 	Col_name string `yaml:"col_name"`
 	Str_len int `yaml:"str_len"`
 	Require bool `yaml:"require"`
+	Domain_name string `yaml:"domain_name"`
+	Ratio float32 `yaml:"ratio"`
 }
 
 type Config struct {
