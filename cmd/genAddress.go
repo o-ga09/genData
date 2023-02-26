@@ -17,6 +17,9 @@ package cmd
 
 import (
 	"fmt"
+	"io/ioutil"
+	"os"
+	"strconv"
 
 	"github.com/spf13/cobra"
 )
@@ -27,8 +30,38 @@ var genAddressCmd = &cobra.Command{
 	Short: "generate dammy mail address",
 	Long: `generate dammy mail address. file foemat csv.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("genAddress called")
+		genAddress(os.Args)
 	},
+}
+
+func genAddress(args []string) {
+	//引数チェック
+	if len(os.Args) < 4 {
+		fmt.Println("need to config file")
+		os.Exit(1)
+	}
+	//コンフィグファイルを開く
+	in_files := args[2]
+	buf ,_:= ioutil.ReadFile(in_files)
+	config_data, err := ReadConfigfile(buf)
+	if err != nil {
+		os.Exit(1)
+	}
+	//データを書き込むファイルを作成する
+	out_file := args[3]
+
+	f,err := os.Create(out_file)
+	if err != nil {
+		os.Exit(1)
+	}
+	defer f.Close()
+
+	for _,d := range config_data.Col_info {
+		for i := 0;i < int(float32(config_data.Row_num) * d.Ratio);i++ {
+			address := fmt.Sprintf("%020s",strconv.Itoa(i)) + d.Domain_name + config_data.Nc
+			f.WriteString(address)
+		}
+	}
 }
 
 func init() {
