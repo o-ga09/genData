@@ -15,9 +15,9 @@
   
 設定ファイルの書式 - config file format
   ```yaml
-    row_num: 100 # データの行数 line of deta
-    nc: "\n"     # 改行文字 newline character 
-    Col_info:    # データの項目情報 data infomation
+  row_num: 100 # データの行数 line of deta
+  nc: "\n"     # 改行文字 newline character 
+  Col_info:    # データの項目情報 data infomation
         - {
             col_name: "test1", #項目名1 column name 1
             str_len: 10,       #項目1の文字列長 length column name 1
@@ -49,9 +49,9 @@
   
   設定ファイルの書式 - config file format
   ```yaml
-    row_num: 100 # データの行数 line of deta
-    nc: "\n"     # 改行文字 newline character 
-    Col_info:    # データの項目情報 data infomation
+  row_num: 100 # データの行数 line of deta
+  nc: "\n"     # 改行文字 newline character 
+  Col_info:    # データの項目情報 data infomation
         - {
             col_name: "test1", #項目名1 column name 1
             str_len: 10,       #項目1の文字列長 length column name 1
@@ -85,9 +85,9 @@
   
   設定ファイルの書式 - config file format
   ```yaml
-    row_num: 100 # データの行数 line of deta
-    nc: "\n"     # 改行文字 newline character 
-    Col_info:    # データの項目情報 data infomation
+  row_num: 100 # データの行数 line of deta
+  nc: "\n"     # 改行文字 newline character 
+  Col_info:    # データの項目情報 data infomation
         - {
             domain_name: "@icloud.com", #ドメイン名1 domain name1
             ratio: 0.5,               #ドメイン名1の出現割合 ratio of domain name1
