@@ -1,20 +1,27 @@
 # Usage for genData
 
+- ## install
+
+~~~bash
+go install github.com/o-ga09/genData@latest
+~~~
+
 - ## genCSV
 
 概要
 
 - 指定桁数の文字列をカンマ区切りでcsvファイルに出力する
 - 改行文字を指定することが可能
-
   
 実行形式 - how to use
-  ```bash
+
+~~~bash
     genData genCSV [config file] [output file name]
-  ```
+~~~
   
 設定ファイルの書式 - config file format
-  ```yaml
+
+~~~yaml
   row_num: 100 # データの行数 line of deta
   nc: "\n"     # 改行文字 newline character 
   Col_info:    # データの項目情報 data infomation
@@ -30,10 +37,9 @@
             col_name: "test3", #項目名3 column name 3
             str_len: 5,        #項目3の文字列長 length column name 3
           }
-  ```
+~~~
 
-  - config file, output file ともにカレントディレクトリに配置、出力されます
-  
+- config file, output file ともにカレントディレクトリに配置、出力されます
 
 - ## genDat
 
@@ -42,13 +48,15 @@
 - 指定桁数の文字列を複数結合した固定長のdatファイルに出力する
 - 改行文字を指定することが可能
 
-  実行形式 - how to use
-  ```bash
+実行形式 - how to use
+
+~~~bash
     genData genDat [config file] [output file name]
-  ```
+~~~
   
   設定ファイルの書式 - config file format
-  ```yaml
+
+~~~yaml
   row_num: 100 # データの行数 line of deta
   nc: "\n"     # 改行文字 newline character 
   Col_info:    # データの項目情報 data infomation
@@ -67,9 +75,9 @@
             str_len: 5,        #項目3の文字列長 length column name 3
             require: false     #項目名3が必要化否かのフラグ flag of required one
           }
-  ```
+~~~
 
-  - config file, output file ともにカレントディレクトリに配置、出力されます
+- config file, output file ともにカレントディレクトリに配置、出力されます
 
 - ## genAddress
 
@@ -79,12 +87,14 @@
 - 改行文字を指定することが可能
 
   実行形式 - how to use
-  ```bash
+
+~~~bash
     genData genAddress [config file] [output file name]
-  ```
+~~~
   
   設定ファイルの書式 - config file format
-  ```yaml
+
+~~~yaml
   row_num: 100 # データの行数 line of deta
   nc: "\n"     # 改行文字 newline character 
   Col_info:    # データの項目情報 data infomation
@@ -100,10 +110,9 @@
             domain_name: "@i.softbank.jp", #ドメイン名1 domain name3
             ratio: 0.25,               #ドメイン名3の出現割合 ratio of domain name3
           }
-  ```
+~~~
 
 - config file, output file ともにカレントディレクトリに配置、出力されます
 - ドメインの出現割合は合計で1となるように設定してください
   
-
 copyright 2023 @o-ga09
